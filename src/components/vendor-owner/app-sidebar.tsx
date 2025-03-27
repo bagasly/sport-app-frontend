@@ -2,13 +2,17 @@
 
 import * as React from "react";
 import {
-  LayoutGrid,
-  Map,
-  ShoppingBag,
-  Users,
-  FileText,
+  LayoutDashboard,
+  MapPlus,
+  GalleryVerticalEnd,
+  ShieldUser,
+  FileClock,
   LogOut,
+  Circle,
 } from "lucide-react";
+
+import Image from "next/image";
+import logowhite from "../../../public/logowhite.svg";
 
 import { Button } from "@/components/ui/button";
 import { NavMain } from "@/components/vendor-owner/nav-main";
@@ -25,50 +29,61 @@ const data = {
     {
       title: "Dashboard",
       url: "#",
-      icon: LayoutGrid,
+      icon: LayoutDashboard,
       isActive: true,
     },
     {
       title: "Lapangan",
       url: "#",
-      icon: Map,
+      icon: MapPlus,
       items: [
-        { title: "Daftar Lapangan", url: "#" },
-        { title: "Jam dan Harga", url: "#" },
+        { title: "Daftar Lapangan", url: "#", icons: Circle },
+        { title: "Jam dan Harga", url: "#", icons: Circle},
       ],
     },
     {
       title: "Produk",
       url: "#",
-      icon: ShoppingBag,
+      icon: GalleryVerticalEnd,
       items: [
-        { title: "Kategori produk", url: "#" },
-        { title: "Daftar produk", url: "#" },
+        { title: "Kategori produk", url: "#", icons: Circle },
+        { title: "Daftar produk", url: "#", icons: Circle },
       ],
     },
     {
       title: "Operator",
       url: "#",
-      icon: Users,
+      icon: ShieldUser,
     },
     {
       title: "Laporan",
       url: "#",
-      icon: FileText,
+      icon: FileClock,
+      
     },
   ],
 };
+
+
 
 export function AppSidebar({ collapsible, ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       {/* Header dengan Logo */}
       <SidebarHeader className="flex flex-col items-center justify-center p-4">
-        <img src="/logo.svg" alt="Atletix Logo" className="h-12 w-auto" />
+        <section >
+        <Image
+              src={logowhite}
+              className="w=30 h=auto"
+              width={200}
+              height={100}
+              alt="logowhite"
+            />
+        </section>
       </SidebarHeader>
 
       {/* Navigasi Menu */}
-      <SidebarContent>
+      <SidebarContent className="flex-col w-full space-y-2 px-4">
         <NavMain items={data.navMain} />
       </SidebarContent>
 
@@ -76,13 +91,11 @@ export function AppSidebar({ collapsible, ...props }: React.ComponentProps<typeo
       <SidebarFooter>
         <Button
           size="lg"
-          className="w-[50%] mx-auto mb-10 flex items-center px-2 py-2 rounded-md transition-all 
-                     hover:bg-red-700 hover:text-white data-[state=open]:bg-red-600"
+          className="w-[50%] bg-sidebar-button text-white mx-auto mb-10 flex items-center px-2 py-2 rounded-md transition-all hover:bg-sidebar-button-foreground hover:text-white"
         >
           <LogOut className="w-5 h-5" />
           <span
-            className="transition-all duration-200 ml-2 truncate text-xs font-medium 
-               data-[state=closed]:opacity-0 data-[state=closed]:w-0 overflow-hidden"
+            className="transition-all duration-200 ml-2 truncate text-xs font-medium data-[state=closed]:opacity-0 data-[state=closed]:w-0 overflow-hidden"
           >
             Keluar
           </span>
