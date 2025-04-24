@@ -1,15 +1,11 @@
-import { NextResponse } from "next/server";
-
-export async function GET() {
-  const data = {
+export const dummyDashboardData = {
     totalRevenue: 1000000,
     totalBookings: 750800,
     revenueChange: 34,
     bookingChange: -13,
     totalProductSales: 500000,
     productSalesChange: 12,
-
-    // 📊 Data untuk Grafik Booking (harian, bulanan, tahunan)
+  
     chartData: {
       daily: [
         { label: "Sen", bookings: 200 },
@@ -34,8 +30,7 @@ export async function GET() {
         { label: "2025", bookings: 130000 },
       ],
     },
-
-    // 🔥 Lapangan Terpopuler
+  
     popularFields: [
       { name: "Griya Sport Center", price: 150000 },
       { name: "Orion Sport Center", price: 125000 },
@@ -48,8 +43,7 @@ export async function GET() {
       { name: "Rumah Futsal", price: 125000 },
       { name: "Yuma - Khi Futsal", price: 135000 },
     ],
-
-    // 📌 Recent Bookings
+  
     recentBookings: [
       {
         field: "Orion Sport Center",
@@ -101,6 +95,4 @@ export async function GET() {
       },
     ],
   };
-
-  return NextResponse.json(data);
-}
+  

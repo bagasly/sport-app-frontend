@@ -14,7 +14,7 @@ export default function DashboardPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch("/api/dashboard-data");
+        const res = await fetch("/api/dashboard");
         if (!res.ok) throw new Error("Gagal mengambil data");
         const result = await res.json();
 
