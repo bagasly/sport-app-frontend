@@ -1,9 +1,26 @@
-
-export interface Cabang {
-    nama: string;
-    lat: number;
-    lng: number;
-    manager: string[];
-    lokasi: string;
-  }
-  
+export type Field =
+  | {
+      type: "text"
+      name: string
+      label: string
+      placeholder?: string
+    }
+  | {
+      type: "coordinate"
+      nameLat: string
+      nameLng: string
+      label: string
+    }
+  | {
+      type: "checkbox"
+      name: string
+      label: string
+      options: { label: string; value: string }[]
+    }
+  | {
+      type: "select"
+      name: string
+      label: string
+      placeholder?: string
+      options: { label: string; value: string }[]
+    }

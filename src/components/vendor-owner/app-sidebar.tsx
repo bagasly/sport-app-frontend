@@ -3,12 +3,13 @@
 import * as React from "react";
 import {
   LayoutDashboard,
+  MapPinned,
   MapPlus,
   GalleryVerticalEnd,
   ShieldUser,
   FileClock,
   LogOut,
-  Circle,
+  Settings,
 } from "lucide-react";
 
 import Image from "next/image";
@@ -28,57 +29,67 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/vendor-owner/dashboard",
       icon: LayoutDashboard,
       isActive: true,
     },
+    {
+      title: "Cabang",
+      url: "/vendor-owner/cabang",
+      icon: MapPinned,
+    },
+
     {
       title: "Lapangan",
       url: "#",
       icon: MapPlus,
       items: [
-        { title: "Daftar Lapangan", url: "#", icons: Circle },
-        { title: "Jam dan Harga", url: "#", icons: Circle},
+        {
+          title: "Daftar Lapangan",
+          url: "/vendor-owner/lapangan/daftarLapangan",
+        },
+        { title: "Jam dan Harga", url: "/vendor-owner/lapangan/jamHarga"},
       ],
     },
     {
-      title: "Produk",
-      url: "#",
+      title: "Stock & Produk",
+      url: "/vendor-owner/produk",
       icon: GalleryVerticalEnd,
-      items: [
-        { title: "Kategori produk", url: "#", icons: Circle },
-        { title: "Daftar produk", url: "#", icons: Circle },
-      ],
-    },
-    {
-      title: "Operator",
-      url: "#",
-      icon: ShieldUser,
     },
     {
       title: "Laporan",
-      url: "#",
+      url: "/vendor-owner/laporan",
       icon: FileClock,
-      
+    },
+    {
+      title: "Operator",
+      url: "/vendor-owner/operator",
+      icon: ShieldUser,
+    },
+    {
+      title: "Pengaturan",
+      url: "/vendor-owner/pengaturan",
+      icon: Settings,
     },
   ],
 };
 
-
-
-export function AppSidebar({ collapsible, ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({
+  collapsible,
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       {/* Header dengan Logo */}
       <SidebarHeader className="flex flex-col items-center justify-center p-4">
-        <section >
-        <Image
-              src={logowhite}
-              className="w=30 h=auto"
-              width={200}
-              height={100}
-              alt="logowhite"
-            />
+        <section>
+          <Image
+            src={logowhite}
+            className="w=30 h=auto"
+            width={200}
+            height={100}
+            alt="logowhite"
+          />
         </section>
       </SidebarHeader>
 
@@ -94,9 +105,7 @@ export function AppSidebar({ collapsible, ...props }: React.ComponentProps<typeo
           className="w-[50%] bg-sidebar-button text-white mx-auto mb-10 flex items-center px-2 py-2 rounded-md transition-all hover:bg-sidebar-button-foreground hover:text-white"
         >
           <LogOut className="w-5 h-5" />
-          <span
-            className="transition-all duration-200 ml-2 truncate text-xs font-medium data-[state=closed]:opacity-0 data-[state=closed]:w-0 overflow-hidden"
-          >
+          <span className="transition-all duration-200 ml-2 truncate text-xs font-medium data-[state=closed]:opacity-0 data-[state=closed]:w-0 overflow-hidden">
             Keluar
           </span>
         </Button>
