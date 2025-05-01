@@ -6,13 +6,6 @@ import { getCabang } from "@/lib/api/cabang"
 import { getManagers } from "@/lib/api/manager"
 import { GenericTable, Column } from "@/components/vendor-owner/generic-table"
 import { Button } from "@/components/ui/button"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
 import GenericFormDialog from "@/components/vendor-owner/generic-form"
 import { getCabangFormFields } from "@/components/vendor-owner/form-config/cabangFields"
 import { Pencil, Trash2 } from "lucide-react"
@@ -144,17 +137,6 @@ export default function CabangPage() {
 
   return (
     <>
-      <div className="px-6 py-4 bg-gray-100">
-        <h1 className="text-lg font-bold">CABANG</h1>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink href="#">Home</BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink href="#">Cabang</BreadcrumbLink></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </div>
-
       <div className="p-4">
         <div className="flex justify-between mb-4">
           <h1 className="text-2xl font-bold">Cabang</h1>
