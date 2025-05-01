@@ -9,7 +9,7 @@ import {
   ShieldUser,
   FileClock,
   LogOut,
-  Circle,
+  Settings,
 } from "lucide-react";
 
 import Image from "next/image";
@@ -46,19 +46,20 @@ const data = {
       items: [
         {
           title: "Daftar Lapangan",
-          url: "/vendor-owner/lapangan/daftarlapangan",
+          url: "/vendor-owner/lapangan/daftarLapangan",
         },
         { title: "Jam dan Harga", url: "/vendor-owner/lapangan/jamHarga"},
       ],
     },
     {
-      title: "Produk",
+      title: "Stock & Produk",
       url: "/vendor-owner/produk",
       icon: GalleryVerticalEnd,
-      items: [
-        { title: "Kategori produk", url: "/vendor-owner/produk/kategoriProduk"},
-        { title: "Daftar produk", url: "#/vendor-owner/produk/daftarProduk"},
-      ],
+    },
+    {
+      title: "Laporan",
+      url: "/vendor-owner/laporan",
+      icon: FileClock,
     },
     {
       title: "Operator",
@@ -66,18 +67,9 @@ const data = {
       icon: ShieldUser,
     },
     {
-      title: "Laporan",
-      url: "/vendor-owner/laporan",
-      icon: FileClock,
-      items: [
-        {
-          title: "Keuangan",
-          url: "/vendor-owner/laporan/keuangan",
-        },
-        { title: "Kendala",
-          url: "/vendor-owner/laporan/kendala",
-        },
-      ],
+      title: "Pengaturan",
+      url: "/vendor-owner/pengaturan",
+      icon: Settings,
     },
   ],
 };

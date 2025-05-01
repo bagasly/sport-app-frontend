@@ -1,6 +1,5 @@
-export default function VendorDashboard() {
-    return (
-      // Render a div with a test message
-      <div>test 1</div>
-    );
-  }
+import { redirect } from 'next/navigation'
+
+export default function VendorOwnerRootPage() {
+  redirect('/vendor-owner/dashboard')
+}
