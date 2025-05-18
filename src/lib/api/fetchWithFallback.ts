@@ -10,7 +10,9 @@ export async function fetchWithFallback<T>(
     }
 
     const json = await res.json()
-    return json.data as T
+
+    // Ensure the correct data structure is returned (if it's directly on json or json.data)
+    return json.data ? (json.data as T) : (json as T)
   } catch (error) {
     console.error("Error fetchWithFallback:", error)
     return dummyData

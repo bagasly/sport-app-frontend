@@ -23,7 +23,7 @@ import { Field } from "@/types/types"
 
 interface GenericFormDialogProps {
   title: string
-  fields: Field[]
+  fields: Field[] // menerima field dari luar, sesuai dengan halaman
   onSubmit: (formData: any) => void
   initialData?: any
   onClose?: () => void
@@ -89,18 +89,16 @@ export default function GenericFormDialog({
         </DialogHeader>
 
         <form className="space-y-4 mt-4" onSubmit={handleSubmit}>
-          {fields.map((field) => {
+          {fields.map((field, index) => {
             if (field.type === "text") {
+              const value = formData[field.name] ?? ""
               return (
-                <div key={field.name}>
-                  <label htmlFor={field.name} className="block font-medium mb-1">
-                    {field.label}
-                  </label>
+                <div key={index}>
+                  <label className="block font-medium mb-1">{field.label}</label>
                   <Input
-                    id={field.name}
                     type="text"
                     placeholder={field.placeholder}
-                    value={formData[field.name] || ""}
+                    value={value}
                     onChange={(e) => handleChange(field.name, e.target.value)}
                     required
                   />
@@ -109,12 +107,11 @@ export default function GenericFormDialog({
             }
 
             if (field.type === "coordinate") {
+              const lat = formData[field.nameLat] ?? ""
+              const lng = formData[field.nameLng] ?? ""
               return (
-                <div key={`${field.nameLat}-${field.nameLng}`} className="space-y-2">
+                <div key={index} className="space-y-2">
                   <p className="font-medium">{field.label}</p>
-                  <p className="text-sm text-muted-foreground">
-                    Buka Google Maps, klik kanan lokasi & salin lat,lng ke bawah:
-                  </p>
                   <a
                     href="https://www.google.com/maps"
                     target="_blank"
@@ -125,16 +122,14 @@ export default function GenericFormDialog({
                   </a>
                   <div className="flex gap-2">
                     <Input
-                      type="text"
                       placeholder="Latitude"
-                      value={formData[field.nameLat] || ""}
+                      value={lat}
                       onChange={(e) => handleChange(field.nameLat, e.target.value)}
                       required
                     />
                     <Input
-                      type="text"
                       placeholder="Longitude"
-                      value={formData[field.nameLng] || ""}
+                      value={lng}
                       onChange={(e) => handleChange(field.nameLng, e.target.value)}
                       required
                     />
@@ -144,17 +139,16 @@ export default function GenericFormDialog({
             }
 
             if (field.type === "checkbox") {
+              const value = formData[field.name] ?? []
               return (
-                <div key={field.name}>
+                <div key={index}>
                   <p className="font-medium mb-2">{field.label}</p>
                   <div className="flex flex-col gap-1">
                     {field.options.map((option) => (
                       <label key={option.value} className="flex items-center gap-2">
                         <Checkbox
-                          checked={(formData[field.name] || []).includes(option.value)}
-                          onCheckedChange={() =>
-                            handleCheckboxChange(field.name, option.value)
-                          }
+                          checked={value.includes(option.value)}
+                          onCheckedChange={() => handleCheckboxChange(field.name, option.value)}
                         />
                         {option.label}
                       </label>
@@ -165,28 +159,23 @@ export default function GenericFormDialog({
             }
 
             if (field.type === "select") {
+              const value = formData[field.name] ?? ""
               return (
-                <div key={field.name}>
+                <div key={index}>
                   <p className="font-medium mb-2">{field.label}</p>
                   <Select
-                    value={formData[field.name] || ""}
-                    onValueChange={(value) => handleChange(field.name, value)}
+                    value={value}
+                    onValueChange={(val) => handleChange(field.name, val)}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder={field.placeholder || field.label} />
                     </SelectTrigger>
                     <SelectContent>
-                      {field.options.length === 0 ? (
-                        <SelectItem value="" disabled>
-                          Tidak ada pilihan tersedia
+                      {field.options.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
                         </SelectItem>
-                      ) : (
-                        field.options.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))
-                      )}
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
@@ -195,6 +184,7 @@ export default function GenericFormDialog({
 
             return null
           })}
+
 
           <DialogFooter className="flex gap-2 justify-end">
             <Button
