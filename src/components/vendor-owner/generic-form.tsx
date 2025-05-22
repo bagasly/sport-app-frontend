@@ -182,6 +182,23 @@ export default function GenericFormDialog({
               )
             }
 
+            if (field.type === "time") {
+              const value = formData[field.name] ?? ""
+              return (
+                <div key={index}>
+                  <label className="block font-medium mb-1">{field.label}</label>
+                  <Input
+                    type="time"
+                    placeholder={field.placeholder}
+                    value={value}
+                    onChange={(e) => handleChange(field.name, e.target.value)}
+                    required
+                  />
+                </div>
+              )
+            }
+
+
             return null
           })}
 

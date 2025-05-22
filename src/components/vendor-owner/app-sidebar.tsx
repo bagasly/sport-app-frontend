@@ -41,7 +41,7 @@ const data = {
 
     {
       title: "Lapangan",
-      url: "#",
+      url: "/vendor-owner/lapangan/daftarLapangan",
       icon: MapPlus,
       items: [
         {
