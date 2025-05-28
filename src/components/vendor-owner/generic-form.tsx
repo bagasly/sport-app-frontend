@@ -13,21 +13,22 @@ import {
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
-  Select,
+  Select as ShadSelect,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
 import { Field } from "@/types/types"
+import ReactSelect from "react-select"
 
 interface GenericFormDialogProps {
   title: string
-  fields: Field[] // menerima field dari luar, sesuai dengan halaman
+  fields: Field[]
   onSubmit: (formData: any) => void
   initialData?: any
   onClose?: () => void
-  hideTrigger?: boolean // untuk menyembunyikan tombol trigger (misal untuk edit)
+  hideTrigger?: boolean
 }
 
 export default function GenericFormDialog({
@@ -58,7 +59,6 @@ export default function GenericFormDialog({
     const updated = current.includes(value)
       ? current.filter((v: string) => v !== value)
       : [...current, value]
-
     setFormData((prev: any) => ({ ...prev, [name]: updated }))
   }
 
@@ -163,7 +163,7 @@ export default function GenericFormDialog({
               return (
                 <div key={index}>
                   <p className="font-medium mb-2">{field.label}</p>
-                  <Select
+                  <ShadSelect
                     value={value}
                     onValueChange={(val) => handleChange(field.name, val)}
                   >
@@ -177,7 +177,34 @@ export default function GenericFormDialog({
                         </SelectItem>
                       ))}
                     </SelectContent>
-                  </Select>
+                  </ShadSelect>
+                </div>
+              )
+            }
+
+            if (field.type === "multiselect") {
+              const selectedValues: string[] = formData[field.name] ?? []
+              const options = field.options.map((opt) => ({
+                value: opt.value,
+                label: opt.label,
+              }))
+              const selected = options.filter((opt) => selectedValues.includes(opt.value))
+
+              return (
+                <div key={index}>
+                  <label className="block font-medium mb-1">{field.label}</label>
+                  <ReactSelect
+                    isMulti
+                    options={options}
+                    value={selected}
+                    onChange={(selectedOptions) =>
+                      handleChange(
+                        field.name,
+                        selectedOptions.map((opt) => opt.value)
+                      )
+                    }
+                    placeholder={field.placeholder || "Pilih opsi"}
+                  />
                 </div>
               )
             }
@@ -198,10 +225,38 @@ export default function GenericFormDialog({
               )
             }
 
+            if (field.type === "image") {
+              const imageUrl = formData[field.name] ?? ""
+
+              const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+                const file = e.target.files?.[0]
+                if (!file) return
+                const url = URL.createObjectURL(file)
+                handleChange(field.name, url)
+              }
+
+              return (
+                <div key={index}>
+                  <label className="block font-medium mb-1">{field.label}</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="block mb-2"
+                  />
+                  {imageUrl && (
+                    <img
+                      src={imageUrl}
+                      alt="Preview"
+                      className="w-32 h-32 object-cover rounded-md border border-gray-300"
+                    />
+                  )}
+                </div>
+              )
+            }
 
             return null
           })}
-
 
           <DialogFooter className="flex gap-2 justify-end">
             <Button

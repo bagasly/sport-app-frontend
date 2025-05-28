@@ -1,4 +1,3 @@
-// lib/api/operator.ts
 import { DaftarLapangan } from "@/types/daftarLapangan"
 import { fetchWithFallback } from "./fetchWithFallback"
 
@@ -10,6 +9,7 @@ const dummyDaftarLapangan: DaftarLapangan[] = [
     jenisLantai: "Rumput Sintetis",
     open: "08:00",
     close: "00:00",
+    gambar: "https://via.placeholder.com/150",
   },
   {
     id: 2,
@@ -18,6 +18,7 @@ const dummyDaftarLapangan: DaftarLapangan[] = [
     jenisLantai: "Vinyl",
     open: "08:00",
     close: "00:00",
+    gambar: "https://via.placeholder.com/150",
   },
 ]
 

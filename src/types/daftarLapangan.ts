@@ -5,4 +5,5 @@ export interface DaftarLapangan {
   jenisLantai: string;
   open: string; 
   close: string; 
+  gambar: string;
 }

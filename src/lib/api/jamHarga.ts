@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server"
 import { JamHarga } from "@/types/jamHarga"
+import { fetchWithFallback } from "./fetchWithFallback"
 
 export const dummyJamHarga: JamHarga[] = [
   {
@@ -28,18 +28,6 @@ export const dummyJamHarga: JamHarga[] = [
   },
 ]
 
-export async function GET() {
-  try {
-    const res = await fetch("http://localhost:3001/api/jamHarga", {
-      cache: "no-store",
-    })
-
-    if (!res.ok) throw new Error("Backend error")
-
-    const data = await res.json()
-    return NextResponse.json(data)
-  } catch (error) {
-    console.error("Gagal ambil data operator dari backend, fallback dummy:", error)
-    return NextResponse.json(dummyJamHarga)
-  }
+export async function getJamHarga(): Promise<JamHarga[]> {
+  return fetchWithFallback<JamHarga[]>("/api/lapangan/jamHarga", dummyJamHarga)
 }

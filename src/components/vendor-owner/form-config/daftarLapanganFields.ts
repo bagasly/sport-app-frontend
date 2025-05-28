@@ -37,4 +37,9 @@ export const getDaftarLapanganFormFields: Field[] = [
     type: "time",
     placeholder: "Pilih jam tutup",
   },
+  {
+    name: "gambar",
+    label: "Gambar",
+    type: "image",
+  },
 ];

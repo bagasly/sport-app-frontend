@@ -30,8 +30,9 @@ export default function DaftarLapanganPage() {
     nama: string;
     cabangOlahraga: string;
     jenisLantai: string;
-    open: string; 
-    close: string; 
+    open: string;
+    close: string;
+    gambar: string;
   }) => {
     const newItem: DaftarLapangan = {
       id: dataDaftarLapangan.length ? Math.max(...dataDaftarLapangan.map((d) => d.id)) + 1 : 1,
@@ -40,6 +41,7 @@ export default function DaftarLapanganPage() {
       jenisLantai: newDaftarLapangan.jenisLantai,
       open: newDaftarLapangan.open,
       close: newDaftarLapangan.close,
+      gambar: newDaftarLapangan.gambar,
     }
 
     setDataDaftarLapangan((prev) => [...prev, newItem])
@@ -49,8 +51,9 @@ export default function DaftarLapanganPage() {
     nama: string;
     cabangOlahraga: string;
     jenisLantai: string;
-    open: string; 
-    close: string; 
+    open: string;
+    close: string;
+    gambar: string;
   }) => {
     if (editIndex === null) return
 
@@ -61,6 +64,7 @@ export default function DaftarLapanganPage() {
       jenisLantai: newData.jenisLantai,
       open: newData.open,
       close: newData.close,
+      gambar: newData.gambar,
     }
 
     const updatedList = [...dataDaftarLapangan]
@@ -80,11 +84,26 @@ export default function DaftarLapanganPage() {
       jenisLantai: DaftarLapangan.jenisLantai,
       open: DaftarLapangan.open,
       close: DaftarLapangan.close,
+      gambar: DaftarLapangan.gambar,
     })
     setEditIndex(index)
   }
 
   const columns: Column<DaftarLapangan>[] = [
+    {
+      key: "gambar",
+      label: "Gambar",
+      render: (value: string) =>
+        value ? (
+          <img
+            src={value}
+            alt="Gambar Lapangan"
+            className="w-16 h-16 object-cover rounded border"
+          />
+        ) : (
+          "-"
+        ),
+    },
     { key: "nama", label: "Nama" },
     { key: "cabangOlahraga", label: "Cabang Olahraga" },
     { key: "jenisLantai", label: "Jenis Lantai" },
@@ -113,8 +132,9 @@ export default function DaftarLapanganPage() {
           </Button>
         </div>
       ),
-    }
+    },
   ]
+
 
   return (
     <>
@@ -133,7 +153,7 @@ export default function DaftarLapanganPage() {
         {/* Edit Dialog */}
         {editInitialData && (
           <GenericFormDialog
-            title="Edit DaftarLapangan"
+            title="Edit Daftar Lapangan"
             fields={getDaftarLapanganFormFields}
             onSubmit={handleEditDaftarLapangan}
             initialData={editInitialData}

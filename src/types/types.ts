@@ -25,8 +25,20 @@ export type Field =
       options: { label: string; value: string }[];
     }
   | {
-      type: "time"; // ✅ Tambahkan bagian ini
+      type: "multiselect";
       name: string;
       label: string;
       placeholder?: string;
-    };
+      options: { label: string; value: string }[];
+    }
+  | {
+      type: "time";
+      name: string;
+      label: string;
+      placeholder?: string;
+    }
+  | {
+      type: "image";
+      name: string;
+      label: string;
+    }

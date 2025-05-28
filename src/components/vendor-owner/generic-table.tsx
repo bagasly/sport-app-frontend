@@ -24,6 +24,8 @@ export function GenericTable<T = any>({ columns, data }: GenericTableProps<T>) {
     <Table>
       <TableHeader>
         <TableRow>
+          {/* Kolom nomor */}
+          <TableHead className="text-center">No.</TableHead>
           {columns.map((col) => (
             <TableHead
               key={String(col.key)}
@@ -40,9 +42,12 @@ export function GenericTable<T = any>({ columns, data }: GenericTableProps<T>) {
           ))}
         </TableRow>
       </TableHeader>
+
       <TableBody>
         {Array.isArray(data) && data.map((row, rowIndex) => (
           <TableRow key={rowIndex}>
+            {/* Nomor baris */}
+            <TableCell className="text-center">{rowIndex + 1}</TableCell>
             {columns.map((col) => (
               <TableCell
                 key={String(col.key)}
@@ -65,3 +70,4 @@ export function GenericTable<T = any>({ columns, data }: GenericTableProps<T>) {
     </Table>
   )
 }
+
