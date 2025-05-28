@@ -52,8 +52,8 @@ const data = {
       ],
     },
     {
-      title: "Stock & Produk",
-      url: "/vendor-owner/produk",
+      title: "Stok & Produk",
+      url: "/vendor-owner/stokProduk",
       icon: GalleryVerticalEnd,
     },
     {

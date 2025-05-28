@@ -19,7 +19,7 @@ const labelMap: Record<string, string> = {
   'vendor-owner': 'Vendor Owner',
   dashboard: 'Dashboard',
   cabang: 'Cabang',
-  produk: 'Stock & Produk',
+  stokProduk: 'Stok & Produk',
   laporan: 'Laporan',
   operator: 'Operator',
   pengaturan: 'Pengaturan',
