@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJS, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend } from "chart.js";
+import { Chart as ChartJS, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, TooltipItem } from "chart.js";
 
 // Registrasi Chart.js modules
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend);
@@ -56,7 +56,7 @@ export default function BookingChart({ data }: BookingChartProps) {
         },
         tooltip: {
           callbacks: {
-            label: (context: any) => ` ${context.raw} booking`,
+            label: (context: TooltipItem<"line">) => ` ${context.raw as number} booking`,
           },
         },
       },
